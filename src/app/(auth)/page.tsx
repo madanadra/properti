@@ -6,6 +6,7 @@ import { Metadata } from "next";
 import { ReadDataHouse, ReadDataHouseBlock, ReadDataHouseStatus, ReadDataHouseType } from "@/typing";
 import Search from "../_components/search";
 import Modal from "./modal";
+import Image from "next/image";
 
 export const metadata: Metadata = {
   title: "Dashboard - Properti",
@@ -50,12 +51,12 @@ export default function Page({searchParams}: {searchParams?: { [key: string]: st
         </div>
         {house_filter.length ? 
           house_filter.map((item, i) => 
-          <div className="grid gap-y-4">
+          <div key={i} className="grid gap-y-4">
             <h1 className="text-slate-600 text-sm font-medium">Blok {item[0].house_block.name}</h1>
-            <div key={i} className="divide-y divide-slate-300 bg-slate-50 rounded-md border border-slate-300">
+            <div className="divide-y divide-slate-300 bg-slate-50 rounded-md border border-slate-300">
               {item.sort((a, b) => Number(a.num) - Number(b.num)).map(item => 
                 <Link key={item.id} href={'/rumah/?v='+item.id} className="flex items-center gap-x-6 p-4 hover:bg-slate-200">
-                  <img src={'./'+item.house_status_id+'.svg'} className="w-12" />
+                  <Image src={item.house_status_id+'.svg'} alt='House' width={48} height={48} priority />
                   <div className="grid sm:flex md:grid lg:flex gap-x-4 w-full">
                     <h1 className="grow font-medium">{item.house_block.name}/{item.num}</h1>
                     <h1 className="text-slate-600">{item.house_status.name}</h1>
@@ -64,7 +65,7 @@ export default function Page({searchParams}: {searchParams?: { [key: string]: st
               )}
             </div>
           </div>) 
-        : search ? <h1 className="text-slate-600 text-center">Tidak ada hasil untuk '<span className="text-slate-950">{search}</span>'</h1> : 
+        : search ? <h1 className="text-slate-600 text-center">Tidak ada hasil untuk &apos;<span className="text-slate-950">{search}</span>&apos;</h1> : 
         <div className="rounded-md border-2 border-dashed border-slate-300 p-4">
             <h1 className="text-slate-600 text-center">Belum ada data</h1>
         </div>}

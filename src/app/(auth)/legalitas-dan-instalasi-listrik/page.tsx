@@ -7,6 +7,7 @@ import { Suspense } from "react";
 import { PiCertificate, PiLightning } from "react-icons/pi";
 import moment from "moment";
 import Modal from "./modal";
+import Image from "next/image";
 
 export const metadata: Metadata = {
   title: "Legalitas dan instalasi listrik - Properti",
@@ -51,7 +52,7 @@ export default function Page({searchParams}: {searchParams?: { [key: string]: st
           <div key={item.id} className="flex items-center gap-x-4 p-4">
             <div className="grow grid gap-y-2">
               <div className="flex items-center gap-x-4">
-                <img src={'./'+item.house_status_id+'.svg'} className="w-8" />
+                <Image src={item.house_status_id+'.svg'} alt='House' width={32} height={32} priority />
                 <h1 className="grow">{item.house_block.name}/{item.num}</h1>
                 <Modal value={item} data_legality={legality.data || []} />
               </div>
@@ -68,7 +69,7 @@ export default function Page({searchParams}: {searchParams?: { [key: string]: st
             </div>
           </div>)}
         </div>
-        : search ? <h1 className="text-slate-600 text-center">Tidak ada hasil untuk '<span className="text-slate-950">{search}</span>'</h1> : 
+        : search ? <h1 className="text-slate-600 text-center">Tidak ada hasil untuk &apos;<span className="text-slate-950">{search}</span>&apos;</h1> : 
         <div className="rounded-md border-2 border-dashed border-slate-300 p-4">
             <h1 className="text-slate-600 text-center">Belum ada data</h1>
         </div>}

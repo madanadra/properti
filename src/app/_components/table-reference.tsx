@@ -30,7 +30,7 @@ export default function TableReference({error, search, no_data, head, children, 
                         </tbody>
                     </table>
                 </div>
-            : search ? <h1 className="text-slate-600 text-center">Tidak ada hasil untuk '<span className="text-slate-950">{search}</span>'</h1> : 
+            : search ? <h1 className="text-slate-600 text-center">Tidak ada hasil untuk &apos;<span className="text-slate-950">{search}</span>&apos;</h1> : 
             <div className="rounded-md border-2 border-dashed border-slate-300 p-4">
                 <h1 className="text-slate-600 text-center">Belum ada data</h1>
             </div>}
