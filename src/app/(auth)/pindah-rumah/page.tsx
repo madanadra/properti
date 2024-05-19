@@ -30,7 +30,7 @@ export default function Page() {
       <div className="grid gap-y-6 p-4">
         {house_available.length ? <HeaderPart data_house={house.data} /> :
         <div className="rounded-md border-2 border-dashed border-slate-300 p-4">
-          <h1 className="text-slate-600 text-center">Semua rumah belum booking</h1>
+          <h1 className="text-slate-600 text-center">Semua rumah tidak dapat pindah</h1>
         </div>}
         <HistoryPart value={moving_house_history.data} />
       </div>
