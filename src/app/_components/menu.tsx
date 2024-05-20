@@ -25,7 +25,7 @@ export default function Menu({user}: {user: ReadUser}) {
     return (
         <div className="grid content-start gap-y-4 bg-slate-50 h-dvh py-4">
             <Link href='/' className="flex items-center gap-x-2.5 px-6 h-16">
-                <Image src='/icon.ico' alt="Icon" width={25} height={25} />
+                <Image src='properti.svg' alt="Logo" width={25} height={25} priority />
                 <h1 className="text-xl font-semibold">Properti</h1>
             </Link>
             <div className="grid gap-y-4 px-2 overflow-y-auto">

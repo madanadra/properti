@@ -556,6 +556,7 @@ export async function moving_house(_current: any, e: FormData) {
 
         if (data.error) return {error: data.error}
 
+        revalidateTag('read-data-house')
         revalidateTag('read-data-moving-house-history')
         return {success: true}
 
@@ -615,6 +616,7 @@ export async function update_password(_current: any, e: FormData) {
 
         if (data.error) return {error: data.error}
 
+        revalidateTag('read-user')
         return {success: true}
 
     } catch (err) {
