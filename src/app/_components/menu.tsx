@@ -33,25 +33,25 @@ export default function Menu({user}: {user: ReadUser}) {
                     <Nav name="Dashboard" />
                 </div>
                 <div className="grid">
-                    <h1 className="font-bold text-xs p-4">Referensi</h1>
+                    <h1 className="font-bold text-xs pb-2.5 pt-4 px-4">Referensi</h1>
                     <Nav name="Blok rumah" />
                     <Nav name="Tipe rumah" />
                     <Nav name="Pegawai" />
                     <Nav name="Notaris" />
                 </div>
                 <div className="grid">
-                    <h1 className="font-bold text-xs p-4">Operasi</h1>
+                    <h1 className="font-bold text-xs pb-2.5 pt-4 px-4">Operasi</h1>
                     <Nav name="Pindah rumah" />
                     <Nav name="Legalitas dan instalasi listrik" />
                 </div>
                 <div className="grid">
-                    <h1 className="font-bold text-xs p-4">Laporan</h1>
+                    <h1 className="font-bold text-xs pb-2.5 pt-4 px-4">Laporan</h1>
                     <Nav name="Penerimaan" />
                     <Nav name="Detail piutang" />
                     <Nav name="Data rumah" />
                 </div>
                 <div className="grid">
-                    <h1 className="font-bold text-xs p-4">Akun</h1>
+                    <h1 className="font-bold text-xs pb-2.5 pt-4 px-4">Akun</h1>
                     <Nav name="Ubah password" />
                     <Nav name="Buat akun" />
                 </div>
