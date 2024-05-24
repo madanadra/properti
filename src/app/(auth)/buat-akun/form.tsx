@@ -1,25 +1,28 @@
 'use client'
 
-import { create_account, deleteToken } from "@/action"
+import { create_account } from "@/action"
 import Load from "@/app/_components/load"
 import Notif from "@/app/_components/notif"
 import { useEffect, useRef, useState } from "react"
 import { useFormState, useFormStatus } from "react-dom"
+import { usePathname, useRouter, useSearchParams } from "next/navigation"
 
 export default function Form() {
     const [notif, setNotif] = useState<boolean>(false)
     const [state, formAction] = useFormState(create_account, null)
     const form = useRef<HTMLFormElement>(null)
+    const router = useRouter()
+    const pathname = usePathname()
+    const searchParams = useSearchParams()
+    const url = '/login'+(pathname+(searchParams.toString() ? '?'+searchParams.toString() : '') === '/' ? '' : 
+    '?gate='+encodeURIComponent(pathname+(searchParams.toString() ? '?'+searchParams.toString() : ''))) 
 
     useEffect(() => {
-        if (state) {
-            if (state.unauth) {
-                window.location.reload()
-                deleteToken()
-            } else {
-                setNotif(true)
-                form.current && form.current.reset()
-            }
+        if (state?.unauth) {
+            router.push(url)
+        } else {
+            setNotif(true)
+            form.current && form.current.reset()
         }
     }, [state])
 
