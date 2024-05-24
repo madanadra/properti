@@ -4,10 +4,6 @@ import { revalidateTag } from "next/cache"
 import { cookies } from 'next/headers'
 import axios, { AxiosError } from "axios"
 
-export async function deleteToken() {
-    cookies().delete('auth-id')
-}
-
 export async function log_in(_current: any, e: FormData) {
     const username = e.get('username')
     const password = e.get('password')

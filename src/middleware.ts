@@ -2,10 +2,14 @@ import { NextResponse, NextRequest } from 'next/server'
 
 export async function middleware(req: NextRequest) {
     const token = req.cookies.get('auth-id')
-    const urlUnauth = req.nextUrl.pathname+req.nextUrl.search
-    const unauth = '/login'+(urlUnauth != '/' ? '?next='+encodeURIComponent(urlUnauth) : '/')
-    const urlAuth = req.nextUrl.searchParams.get('next') || '/'
-    const auth = urlAuth != '/login' ? urlAuth : '/'
+    const atLogin = req.nextUrl.pathname === '/login'
+    const atHouse = req.nextUrl.pathname === '/rumah'
+    const gate = '?gate='+encodeURIComponent(req.nextUrl.pathname+req.nextUrl.search)
+    const getGate = req.nextUrl.searchParams.get('gate') || '/'
+    const auth = NextResponse.redirect(new URL(getGate === '/login' ? '/' : getGate, req.url))
+    const unauth = NextResponse.redirect(new URL('/login'+(req.nextUrl.pathname+req.nextUrl.search === '/' ? '' : gate), req.url))
+    const dashboard = NextResponse.redirect(new URL('/', req.url))
+    const pass = NextResponse.next()
 
     if (token) {
         try {
@@ -17,22 +21,27 @@ export async function middleware(req: NextRequest) {
                 cache: 'no-cache'
             })
         
-            if (!res.ok) {
-                if (!req.url.includes('/login')) {
-                    return NextResponse.redirect(new URL(unauth, req.url))
+            if (res.ok) {
+                if (atLogin) {
+                    return auth
+                } else if (atHouse && !req.nextUrl.searchParams.get('v')) {
+                    return dashboard
+                } else {
+                    return pass
                 }
-            } else if (req.url.includes('/login')) {
-                return NextResponse.redirect(new URL(auth, req.url))
-            } else if (req.url.includes('/rumah')) {
-                const id = req.nextUrl.searchParams.get('v')
-    
-                if (!id) {
-                    return NextResponse.redirect(new URL('/', req.url))
-                }
+            } else if (!atLogin) {
+                return unauth
+            } else {
+                pass.cookies.delete('auth-id')
+                return pass
             }
-        } catch {}
-    } else if (!req.url.includes('/login')) {
-        return NextResponse.redirect(new URL(unauth, req.url))
+        } catch {
+            return pass
+        }
+    } else if (!atLogin) {
+        return unauth
+    } else {
+        return pass
     }
 }
 

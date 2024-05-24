@@ -8,6 +8,7 @@ import { useState } from "react";
 import moment from "moment";
 import ModalResetStatus from "./modal-reset-status";
 import ModalCancelHouse from "./modal-cancel-house";
+import Image from "next/image";
 
 export default function HousePart(
     {value, data_customer, data_house_status}: 
@@ -52,7 +53,8 @@ export default function HousePart(
         <div className="grid gap-y-4">
             <div className="grid sm:flex md:grid lg:flex gap-y-6 gap-x-4 rounded-md bg-slate-50 border border-slate-300 p-4">
                 <div className="grow flex items-center gap-x-6">
-                    <img src={'./'+value.house_status.id+'.svg'} className="w-20 aspect-square" />
+                    <Image src={value.house_status.id+'.svg'} alt='House' width={80} height={80} priority
+                    className="aspect-square" />
                     <div>
                         <h1 className="text-2xl font-medium">{value.house_block.name}/{value.num}</h1>
                         <h1 className="text-slate-600 font-semibold">{value.house_status.name}</h1>

@@ -10,6 +10,7 @@ import AdministrationPart from "./administration-part";
 import { ReadDataCustomer, ReadDataEmployee, ReadDataHouseBlock, ReadDataHouseStatus, ReadDataHouseType, ReadDataPaymentTitle, ReadDataPurchaseType, ReadHouse } from "@/typing";
 import DetailPart from "./detail-part";
 import PaymentHistoryPart from "./payment-history-part";
+import Image from "next/image";
 
 export const metadata: Metadata = {
   title: "Rumah - Properti",
@@ -32,8 +33,16 @@ export default function Page({searchParams}: {searchParams?: { [key: string]: st
             !house_type.data || house_type.error || !customer.data || customer.error || 
             !employee.data || employee.error || !payment_title.data || payment_title.error || !purchase_type.data || 
             purchase_type.error) {
+            if (house.error === 'read-house 404') {
+                return (
+                    <div className="rounded-md border-2 border-dashed border-slate-300 p-4 m-4">
+                        <h1 className="text-slate-600 text-center">Rumah tidak ditemukan</h1>
+                    </div>
+                )
+            }
+
             return (
-                <div className="grid gap-y-4 text-slate-600 text-center px-4">
+                <div className="grid gap-y-4 text-slate-600 text-center p-4">
                     {house.error && <h1>{house.error}</h1>}
                     {house_status.error && <h1>{house_status.error}</h1>}
                     {house_block.error && <h1>{house_block.error}</h1>}
@@ -53,7 +62,8 @@ export default function Page({searchParams}: {searchParams?: { [key: string]: st
                 <HookPart value={house.data} />
                 {house.data.house_status_id < 4 && !house.data.customer ? 
                     <div className="grid gap-y-4 justify-items-center py-8 px-4 rounded-md border-2 border-dashed border-slate-300">
-                        <img src='empty-house.svg' className="w-52 aspect-square max-w-full" />
+                        <Image src='empty-house.svg' alt='Empty house' width={208} height={208} priority
+                        className="aspect-square max-w-full" />
                         <h1 className="text-lg text-center text-slate-600">Rumah belum booking</h1>
                     </div> : <>
                     <CustomerPart value={house.data} />

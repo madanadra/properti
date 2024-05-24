@@ -1,6 +1,6 @@
 'use client'
 
-import { deleteToken, log_out } from "@/action"
+import { log_out } from "@/action"
 import { useFormState } from "react-dom"
 import { useFormStatus } from "react-dom"
 import Load from "./load"
@@ -13,8 +13,7 @@ export default function FormLogOut() {
 
   useEffect(() => {
     if (state?.success || state?.unauth) {
-      window.location.reload()
-      deleteToken()
+      window.location.href = '/login'
     } else if (state?.error) {
       setNotif(true)
     }

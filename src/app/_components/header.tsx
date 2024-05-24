@@ -21,7 +21,7 @@ export default function Header({user}: {user: ReadUser}) {
             </div>
             <h1 className="grow text-2xl font-semibold">{url === '/' ? 'Dashboard' : url.substring(1).replace(/-/g, ' ').replace(/^\w/, (c) => c.toUpperCase())}</h1>
             <div onClick={() => setMenu(false)} className={`${menu ? 'md:hidden' : 'hidden'} fixed inset-0 bg-slate-950 bg-opacity-50 z-50`}>
-                <div onClick={(e) => e.stopPropagation()} className='w-5/6 max-w-sm sticky top-0 h-full'>
+                <div onClick={(e) => e.stopPropagation()} className='w-5/6 max-w-sm sticky top-0 h-full anim-sidebar'>
                     <Menu user={user} />
                 </div>
             </div>

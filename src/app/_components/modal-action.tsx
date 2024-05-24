@@ -4,7 +4,7 @@ import { useEffect, useState, useRef } from "react"
 import { useFormState, useFormStatus } from "react-dom"
 import Load from "./load"
 import Notif from "./notif"
-import { deleteToken } from "@/action"
+import { usePathname, useRouter, useSearchParams } from "next/navigation"
 
 export default function ModalAction(
     {name, action, submit, success, button_name, button_type, hide, setShowMirror, children}: 
@@ -14,6 +14,11 @@ export default function ModalAction(
     const [notif, setNotif] = useState<boolean>(false)
     const [state, formAction] = useFormState(action, null)
     const form = useRef<HTMLFormElement>(null)
+    const router = useRouter()
+    const pathname = usePathname()
+    const searchParams = useSearchParams()
+    const url = '/login'+(pathname+(searchParams.toString() ? '?'+searchParams.toString() : '') === '/' ? '' : 
+    '?gate='+encodeURIComponent(pathname+(searchParams.toString() ? '?'+searchParams.toString() : ''))) 
 
     useEffect(() => {
         setShowMirror && setShowMirror(show)
@@ -21,13 +26,10 @@ export default function ModalAction(
     }, [show])
 
     useEffect(() => {
-        if (state) {
-            if (state.unauth) {
-                window.location.reload()
-                deleteToken()
-            } else {
-                setNotif(true)
-            }
+        if (state?.unauth) {
+            router.push(url)
+        } else {
+            setNotif(true)
         }
     }, [state])
 
@@ -60,7 +62,7 @@ export default function ModalAction(
     const Modal = () => {
         return (
             <div onClick={() => setShow(false)} className={`${show ? 'grid' : 'hidden'} content-center justify-items-center fixed inset-0 bg-slate-950 bg-opacity-50 p-4 z-10`}>
-                <div onClick={(e) => e.stopPropagation()} className='grid divide-y divide-slate-300 bg-slate-50 border border-slate-300 rounded-md w-full overflow-y-auto max-w-sm'>
+                <div onClick={(e) => e.stopPropagation()} className='grid divide-y divide-slate-300 bg-slate-50 border border-slate-300 rounded-md w-full overflow-y-auto max-w-sm anim-modal'>
                     <div className="grid gap-y-4 p-4 pb-6 overflow-y-auto">
                         <h1 className="text-lg font-semibold mb-2">{name}</h1>
                         {children}
