@@ -378,7 +378,7 @@ export async function create_house(_current: any, e: FormData) {
     const booking_fee = e.get('booking-fee')
     
     try {
-        const { data } = await axios.post(process.env.NEXT_PUBLIC_BASE_API+'/create-house/', 
+        const { data } = await axios.post(process.env.NEXT_PUBLIC_BASE_API+'/create-house', 
         {
             house_block_id: house_block_id,
             num: num,
@@ -409,7 +409,7 @@ export async function create_house_block(_current: any, e: FormData) {
     const name = e.get('name')
     
     try {
-        const { data } = await axios.post(process.env.NEXT_PUBLIC_BASE_API+'/create-house-block/', 
+        const { data } = await axios.post(process.env.NEXT_PUBLIC_BASE_API+'/create-house-block', 
         {name: name}, 
         {
             headers: { Authorization: 'Bearer '+cookies().get('auth-id')?.value }
@@ -434,7 +434,7 @@ export async function create_house_type(_current: any, e: FormData) {
     const land = e.get('land')
     
     try {
-        const { data } = await axios.post(process.env.NEXT_PUBLIC_BASE_API+'/create-house-type/', 
+        const { data } = await axios.post(process.env.NEXT_PUBLIC_BASE_API+'/create-house-type', 
         {
             building: building,
             land: land
@@ -461,7 +461,7 @@ export async function create_employee(_current: any, e: FormData) {
     const name = e.get('name')
     
     try {
-        const { data } = await axios.post(process.env.NEXT_PUBLIC_BASE_API+'/create-employee/', 
+        const { data } = await axios.post(process.env.NEXT_PUBLIC_BASE_API+'/create-employee', 
         {name: name}, 
         {
             headers: { Authorization: 'Bearer '+cookies().get('auth-id')?.value }
@@ -485,7 +485,7 @@ export async function create_notary(_current: any, e: FormData) {
     const name = e.get('name')
     
     try {
-        const { data } = await axios.post(process.env.NEXT_PUBLIC_BASE_API+'/create-notary/', 
+        const { data } = await axios.post(process.env.NEXT_PUBLIC_BASE_API+'/create-notary', 
         {name: name}, 
         {
             headers: { Authorization: 'Bearer '+cookies().get('auth-id')?.value }
@@ -541,7 +541,7 @@ export async function moving_house(_current: any, e: FormData) {
     const to_house_id = e.get('to-house-id')
     
     try {
-        const { data } = await axios.patch(process.env.NEXT_PUBLIC_BASE_API+'/moving-house/', 
+        const { data } = await axios.patch(process.env.NEXT_PUBLIC_BASE_API+'/moving-house', 
         {
             from_house_id: from_house_id,
             to_house_id: to_house_id
@@ -600,7 +600,7 @@ export async function update_password(_current: any, e: FormData) {
     const new_password_confirmation = e.get('new-password-confirmation')
     
     try {
-        const { data } = await axios.patch(process.env.NEXT_PUBLIC_BASE_API+'/update-password/', 
+        const { data } = await axios.patch(process.env.NEXT_PUBLIC_BASE_API+'/update-password', 
         {
             old_password: old_password,
             new_password: new_password,
@@ -630,7 +630,7 @@ export async function create_account(_current: any, e: FormData) {
     const password_confirmation = e.get('password-confirmation')
     
     try {
-        const { data } = await axios.post(process.env.NEXT_PUBLIC_BASE_API+'/create-account/', 
+        const { data } = await axios.post(process.env.NEXT_PUBLIC_BASE_API+'/create-account', 
         {
             username: username,
             password: password,
