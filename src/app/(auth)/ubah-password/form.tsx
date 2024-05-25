@@ -5,21 +5,15 @@ import Load from "@/app/_components/load"
 import Notif from "@/app/_components/notif"
 import { useEffect, useRef, useState } from "react"
 import { useFormState, useFormStatus } from "react-dom"
-import { usePathname, useRouter, useSearchParams } from "next/navigation"
 
 export default function Form() {
     const [notif, setNotif] = useState<boolean>(false)
     const [state, formAction] = useFormState(update_password, null)
     const form = useRef<HTMLFormElement>(null)
-    const router = useRouter()
-    const pathname = usePathname()
-    const searchParams = useSearchParams()
-    const url = '/login'+(pathname+(searchParams.toString() ? '?'+searchParams.toString() : '') === '/' ? '' : 
-    '?gate='+encodeURIComponent(pathname+(searchParams.toString() ? '?'+searchParams.toString() : ''))) 
 
     useEffect(() => {
         if (state?.unauth) {
-            router.push(url)
+            window.location.reload()
         } else {
             setNotif(true)
             form.current && form.current.reset()

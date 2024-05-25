@@ -4,7 +4,6 @@ import { useEffect, useState, useRef } from "react"
 import { useFormState, useFormStatus } from "react-dom"
 import Load from "./load"
 import Notif from "./notif"
-import { usePathname, useRouter, useSearchParams } from "next/navigation"
 
 export default function ModalAction(
     {name, action, submit, success, button_name, button_type, hide, setShowMirror, children}: 
@@ -14,11 +13,6 @@ export default function ModalAction(
     const [notif, setNotif] = useState<boolean>(false)
     const [state, formAction] = useFormState(action, null)
     const form = useRef<HTMLFormElement>(null)
-    const router = useRouter()
-    const pathname = usePathname()
-    const searchParams = useSearchParams()
-    const url = '/login'+(pathname+(searchParams.toString() ? '?'+searchParams.toString() : '') === '/' ? '' : 
-    '?gate='+encodeURIComponent(pathname+(searchParams.toString() ? '?'+searchParams.toString() : ''))) 
 
     useEffect(() => {
         setShowMirror && setShowMirror(show)
@@ -27,7 +21,7 @@ export default function ModalAction(
 
     useEffect(() => {
         if (state?.unauth) {
-            router.push(url)
+            window.location.reload()
         } else {
             setNotif(true)
         }

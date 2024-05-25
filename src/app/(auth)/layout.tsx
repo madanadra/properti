@@ -16,7 +16,7 @@ export default function Layout({
     if (!user.data || user.error) {
       return (
         <div className="grid place-content-center h-dvh p-4">
-          <h1 className="text-slate-600">{user.error}</h1>
+          <h1 className="text-slate-600 text-center">{user.error}</h1>
         </div>
       )
     }
@@ -38,7 +38,7 @@ export default function Layout({
 
   return (
     <Suspense fallback={
-      <div className="grid place-content-center h-dvh">
+      <div className="grid place-content-center h-dvh p-4">
         <Load size="large" />
       </div>
     }>

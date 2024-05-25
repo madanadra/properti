@@ -30,7 +30,7 @@ export default function PaymentPart({value, data_payment_title}: {value: ReadHou
         const paid = payment(id)
         const percent = Math.floor(paid/total*100)
         
-        return ((paid != 0 || total != 0) &&
+        return ((paid !== 0 || total !== 0) &&
             <div className="text-sm grid divide-y divide-slate-300 rounded-md bg-slate-50 border border-slate-300">
                 <div className="flex justify-between items-center gap-x-4 rounded-t-md bg-slate-100 p-4">
                     <div className="grid gap-y-1">
